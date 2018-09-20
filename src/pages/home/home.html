@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-tabs>
+  <ion-tab tabTitle="Story" [root]="productTab" tabIcon="book" [rootParams]="idCategory"></ion-tab>
+  <ion-tab tabTitle="Favorite" [root]="favoriteTab" tabIcon="star"></ion-tab>
+</ion-tabs>

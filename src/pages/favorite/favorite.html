@@ -1,0 +1,67 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>favorite</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form novalidate [formGroup]="group">
+    <ion-list >
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" formControlName="Email"></ion-input>
+      </ion-item>
+      
+      <ion-item no-lines *ngIf="(group.get('Email').hasError('required') || group.get('Email').hasError('email') ) && (group.get('Email').touched)">         
+          <div class="error" *ngIf="group.get('Email').hasError('required') && group.get('Email').touched">
+            Email is required
+          </div>
+          <div class="error" *ngIf="group.get('Email').hasError('email') && group.get('Email').touched">
+            Please enter valid email
+          </div>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input type="text" formControlName="FirstName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input type="text" formControlName="LastName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Gender</ion-label>
+        <ion-select formControlName="Gender" #gender (ionChange)="onChange(gender.value)">
+          <ion-option *ngFor="let val of values" [value]="val.id">{{val.text}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="Password"></ion-input>
+      </ion-item>
+      <ion-item no-lines *ngIf="(group.get('Password').hasError('required') || group.get('Password').hasError('minlength') ) && group.get('Password').touched">         
+        <div class="error" *ngIf="group.get('Password').hasError('required') && group.get('Password').touched">
+          Password is required
+        </div>
+        <div class="error" *ngIf="group.get('Password').hasError('minlength') && group.get('Password').touched">
+          Password must be at least 6 characters long.
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input type="password" formControlName="ConfirmPassword"></ion-input>
+      </ion-item>
+      <ion-item no-lines *ngIf="(group.get('ConfirmPassword').hasError('required') || group.get('ConfirmPassword').hasError('MatchPassword') ) && group.get('ConfirmPassword').touched">         
+        <div class="error">
+          Confirm Password not match Password.
+        </div>
+      </ion-item>
+      
+    </ion-list>
+    <button ion-button class="submit-button" [disabled]="group.invalid" (click)= "createAccount()">Submit</button>
+  </form>
+  <p>{{userModel?.email}}</p>
+</ion-content>
+
